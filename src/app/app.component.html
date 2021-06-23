@@ -1,4 +1,5 @@
 <main [class]="theme">
+  {{canHideSerie}}
   <div class="chart-col">
     <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;">
       <ngx-charts-bar-vertical
@@ -359,6 +360,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [canHideSerie]="canHideSerie"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -469,6 +471,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [canHideSerie]="canHideSerie"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -508,6 +511,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [canHideSerie]="canHideSerie"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -546,6 +550,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [canHideSerie]="canHideSerie"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -787,6 +792,7 @@
           [legend]="false"
           [legendTitle]="legendTitle"
           [legendPosition]="legendPosition"
+          [canHideSerie]="canHideSerie"
           (legendLabelClick)="onLegendLabelClick($event)"
           [gradient]="gradient"
           [xAxis]="showXAxis"
@@ -930,6 +936,7 @@
         [legend]="showLegend"
         [legendTitle]="legendTitle"
         [legendPosition]="legendPosition"
+        [canHideSerie]="canHideSerie"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -1304,6 +1311,13 @@
             <option value="right">Right</option>
             <option value="below">Below</option> </select
           ><br />
+        </div>
+        <div *ngIf="chart.options.includes('canHideSerie')">
+          <label>
+            <input type="checkbox" [checked]="canHideSerie" (change)="canHideSerie = $event.target.checked" />
+            Can Hide Serie
+          </label>
+          <br />
         </div>
         <div *ngIf="chart.options.includes('tooltipDisabled')">
           <label>
