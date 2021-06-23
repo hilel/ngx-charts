@@ -72,6 +72,7 @@ export * from './lib/common/trim-label.helper';
 export * from './lib/common/view-dimensions.helper';
 export * from './lib/common/label.helper';
 export * from './lib/common/domain.helper';
+export * from './lib/common/toggle-entry.helper';
 
 export * from './lib/gauge/gauge.module';
 export * from './lib/gauge/gauge-arc.component';
