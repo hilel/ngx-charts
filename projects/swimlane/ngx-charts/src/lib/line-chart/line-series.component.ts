@@ -11,7 +11,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       <defs>
         <svg:g
           ngx-charts-svg-linear-gradient
-          *ngIf="hasGradient"
+          *ngIf="hasGradient && !isHidden(data)"
           orientation="vertical"
           [name]="gradientId"
           [stops]="gradientStops"
@@ -19,6 +19,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       </defs>
       <svg:g
         ngx-charts-area
+        *ngIf="!isHidden(data)"
         class="line-highlight"
         [data]="data"
         [path]="areaPath"
@@ -33,6 +34,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       />
       <svg:g
         ngx-charts-line
+        *ngIf="!isHidden(data)"
         class="line-series"
         [data]="data"
         [path]="path"
@@ -43,7 +45,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       />
       <svg:g
         ngx-charts-area
-        *ngIf="hasRange"
+        *ngIf="hasRange && !isHidden(data)"
         class="line-series-range"
         [data]="data"
         [path]="outerPath"
@@ -65,6 +67,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() scaleType;
   @Input() curve: any;
   @Input() activeEntries: any[];
+  @Input() hiddenEntries: any[];
   @Input() rangeFillOpacity: number;
   @Input() hasRange: boolean;
   @Input() animations: boolean = true;
@@ -205,5 +208,13 @@ export class LineSeriesComponent implements OnChanges {
       return entry.name === d.name;
     });
     return item === undefined;
+  }
+
+  isHidden(entry): boolean {
+    if (!this.hiddenEntries || this.hiddenEntries.length === 0) return false;
+    const item = this.hiddenEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item !== undefined;
   }
 }

@@ -38,6 +38,7 @@ import { ColorHelper } from '../common/color.helper';
       />
       <svg:g
         ngx-charts-circle
+        *ngIf="!isHidden({ name: circle.seriesName })"
         class="circle"
         [cx]="circle.cx"
         [cy]="circle.cy"
@@ -57,6 +58,7 @@ import { ColorHelper } from '../common/color.helper';
         [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="circle.data"
+        [hidden]="isHidden({ name: circle.seriesName })"
       />
     </svg:g>
   `,
@@ -81,6 +83,7 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
+  @Input() hiddenEntries: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
 
@@ -231,6 +234,14 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   isActive(entry): boolean {
     if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item !== undefined;
+  }
+
+  isHidden(entry): boolean {
+    if (!this.hiddenEntries) return false;
+    const item = this.hiddenEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;

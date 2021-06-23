@@ -16,6 +16,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   template: `
     <svg:g
       ngx-charts-area
+      *ngIf="!isHidden(data)"
       class="area-series"
       [data]="data"
       [path]="path"
@@ -43,6 +44,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() gradient;
   @Input() curve;
   @Input() activeEntries: any[];
+  @Input() hiddenEntries: any[];
   @Input() animations: boolean = true;
 
   @Output() select = new EventEmitter();
@@ -143,5 +145,13 @@ export class AreaSeriesComponent implements OnChanges {
       return entry.name === d.name;
     });
     return item === undefined;
+  }
+
+  isHidden(entry): boolean {
+    if (!this.hiddenEntries || this.hiddenEntries.length === 0) return false;
+    const item = this.hiddenEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item !== undefined;
   }
 }

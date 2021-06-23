@@ -18,6 +18,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
+import { toggleEntry } from '../common/toggle-entry.helper';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -27,10 +28,12 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [hiddenEntries]="hiddenEntries"
       [animations]="animations"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
+      (legendLabelToggle)="onToggle($event)"
     >
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
@@ -83,6 +86,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
+              [hiddenEntries]="hiddenEntries"
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
@@ -100,6 +104,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
               [yScale]="yScale"
               [results]="results"
               [colors]="colors"
+              [hiddenEntries]="hiddenEntries"
               [tooltipDisabled]="tooltipDisabled"
               [tooltipTemplate]="seriesTooltipTemplate"
               (hover)="updateHoveredVertical($event)"
@@ -115,6 +120,7 @@ import { getUniqueXDomainValues, getScaleType } from '../common/domain.helper';
                 [scaleType]="scaleType"
                 [visibleValue]="hoveredVertical"
                 [activeEntries]="activeEntries"
+                [hiddenEntries]="hiddenEntries"
                 [tooltipDisabled]="tooltipDisabled"
                 [tooltipTemplate]="tooltipTemplate"
                 (select)="onClick($event)"
@@ -177,6 +183,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() legend;
   @Input() legendTitle: string = 'Legend';
   @Input() legendPosition: string = 'right';
+  @Input() canHideSerie: boolean = false;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -189,6 +196,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
+  @Input() hiddenEntries: any[] = [];
   @Input() schemeType: string;
   @Input() rangeFillOpacity: number;
   @Input() trimXAxisTicks: boolean = true;
@@ -212,6 +220,7 @@ export class LineChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  @Output() toggle: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
   @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
@@ -496,5 +505,12 @@ export class LineChartComponent extends BaseChartComponent {
       this.deactivate.emit({ value: entry, entries: [] });
     }
     this.activeEntries = [];
+  }
+
+  onToggle(item) {
+    if(!this.canHideSerie) return;
+    const toggleResult = toggleEntry(item, this.hiddenEntries);
+    this.hiddenEntries = toggleResult.hiddenEntries;
+    this.toggle.emit({ value: item, hidden: toggleResult.hidden, hiddenEntries: this.hiddenEntries });
   }
 }

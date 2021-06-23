@@ -13,6 +13,8 @@ import {
   selector: 'g[ngx-charts-circle]',
   template: `
     <svg:circle
+    title="hidden"
+      *ngIf="!hidden"
       [attr.cx]="cx"
       [attr.cy]="cy"
       [attr.r]="r"
@@ -35,6 +37,7 @@ export class CircleComponent implements OnChanges {
   @Input() classNames;
   @Input() circleOpacity;
   @Input() pointerEvents;
+  @Input() hidden: boolean;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

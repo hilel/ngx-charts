@@ -18,10 +18,12 @@ import { createMouseEvent } from '../events';
       />
       <ng-template #defaultTooltipTemplate let-model="model">
         <xhtml:div class="area-tooltip-container">
-          <xhtml:div *ngFor="let tooltipItem of model" class="tooltip-item">
-            <xhtml:span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></xhtml:span>
-            {{ getToolTipText(tooltipItem) }}
-          </xhtml:div>
+          <ng-container *ngFor="let tooltipItem of model">
+            <xhtml:div *ngIf="!isHidden(tooltipItem)" class="tooltip-item">
+              <xhtml:span class="tooltip-item-color" [style.background-color]="tooltipItem.color"></xhtml:span>
+              {{ getToolTipText(tooltipItem) }}
+            </xhtml:div>
+          </ng-container>
         </xhtml:div>
       </ng-template>
       <svg:rect
@@ -78,6 +80,7 @@ export class TooltipArea {
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() hiddenEntries: any[];
 
   @Output() hover = new EventEmitter();
 
@@ -222,5 +225,13 @@ export class TooltipArea {
       result += ')';
     }
     return result;
+  }
+
+  isHidden(tooltipItem) {
+    if (!this.hiddenEntries) return false;
+    const item = this.hiddenEntries.find(d => {
+      return tooltipItem.series === d.name;
+    });
+    return item !== undefined;
   }
 }
