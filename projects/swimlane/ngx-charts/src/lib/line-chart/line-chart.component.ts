@@ -155,6 +155,7 @@ import { toggleEntry } from '../common/toggle-entry.helper';
             [curve]="curve"
             [hasRange]="hasRange"
             [animations]="animations"
+            [hiddenEntries]="hiddenEntries"
           />
         </svg:g>
       </svg:g>
