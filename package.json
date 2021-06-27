@@ -20,7 +20,7 @@
     "deploy": "angular-cli-ghpages --dir ./dist/ngx-charts --name=Swimlane --email=developer@swimlane.com",
     "package": "run-s build:lib:prod copy-files",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
-    "prettier:ci": "prettier --check \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
+    "prettier:ci": "prettier --check \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\""
   },
   "dependencies": {
     "@angular/animations": "~10.2.5",
