@@ -1,0 +1,33 @@
+import { OnChanges, SimpleChanges } from '@angular/core';
+export declare class LineSeriesComponent implements OnChanges {
+    data: any;
+    xScale: any;
+    yScale: any;
+    colors: any;
+    scaleType: any;
+    curve: any;
+    activeEntries: any[];
+    hiddenEntries: any[];
+    rangeFillOpacity: number;
+    hasRange: boolean;
+    animations: boolean;
+    path: string;
+    outerPath: string;
+    areaPath: string;
+    gradientId: string;
+    gradientUrl: string;
+    hasGradient: boolean;
+    gradientStops: any[];
+    areaGradientStops: any[];
+    stroke: any;
+    ngOnChanges(changes: SimpleChanges): void;
+    update(): void;
+    getLineGenerator(): any;
+    getRangeGenerator(): any;
+    getAreaGenerator(): any;
+    sortData(data: any): any;
+    updateGradients(): void;
+    isActive(entry: any): boolean;
+    isInactive(entry: any): boolean;
+    isHidden(entry: any): boolean;
+}

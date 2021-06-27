@@ -1,0 +1,26 @@
+/**
+ * Adds an entry to hidden entries if not exists, or removes it from hidden entries if exists
+ *
+ * @export
+ *
+ * @param item
+ * @param hiddenEntries
+ *
+ * @returns {Object} Returns back object containing the hiddenEntries and hidden properties
+ */
+export function toggleEntry(item, hiddenEntries) {
+    let hidden;
+    const idx = hiddenEntries.findIndex(d => {
+        return d.name === item.name && d.value === item.value;
+    });
+    if (idx > -1) {
+        hiddenEntries.splice(idx, 1);
+        hidden = false;
+    }
+    else {
+        hiddenEntries.push(item);
+        hidden = true;
+    }
+    return { hidden, hiddenEntries: [...hiddenEntries] };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9nZ2xlLWVudHJ5LmhlbHBlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL3N3aW1sYW5lL25neC1jaGFydHMvc3JjL2xpYi9jb21tb24vdG9nZ2xlLWVudHJ5LmhlbHBlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7O0dBU0c7QUFDSCxNQUFNLFVBQVUsV0FBVyxDQUFDLElBQVMsRUFBRSxhQUFvQjtJQUN6RCxJQUFJLE1BQWUsQ0FBQztJQUNwQixNQUFNLEdBQUcsR0FBRyxhQUFhLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFO1FBQ3RDLE9BQU8sQ0FBQyxDQUFDLElBQUksS0FBSyxJQUFJLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQyxLQUFLLEtBQUssSUFBSSxDQUFDLEtBQUssQ0FBQztJQUN4RCxDQUFDLENBQUMsQ0FBQztJQUNILElBQUcsR0FBRyxHQUFHLENBQUMsQ0FBQyxFQUFFO1FBQ1gsYUFBYSxDQUFDLE1BQU0sQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDN0IsTUFBTSxHQUFHLEtBQUssQ0FBQztLQUNoQjtTQUFNO1FBQ0wsYUFBYSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN6QixNQUFNLEdBQUcsSUFBSSxDQUFDO0tBQ2Y7SUFDRCxPQUFPLEVBQUUsTUFBTSxFQUFFLGFBQWEsRUFBRSxDQUFDLEdBQUcsYUFBYSxDQUFDLEVBQUUsQ0FBQztBQUN2RCxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIEFkZHMgYW4gZW50cnkgdG8gaGlkZGVuIGVudHJpZXMgaWYgbm90IGV4aXN0cywgb3IgcmVtb3ZlcyBpdCBmcm9tIGhpZGRlbiBlbnRyaWVzIGlmIGV4aXN0c1xyXG4gKiBcclxuICogQGV4cG9ydFxyXG4gKiBcclxuICogQHBhcmFtIGl0ZW1cclxuICogQHBhcmFtIGhpZGRlbkVudHJpZXMgXHJcbiAqIFxyXG4gKiBAcmV0dXJucyB7T2JqZWN0fSBSZXR1cm5zIGJhY2sgb2JqZWN0IGNvbnRhaW5pbmcgdGhlIGhpZGRlbkVudHJpZXMgYW5kIGhpZGRlbiBwcm9wZXJ0aWVzXHJcbiAqL1xyXG5leHBvcnQgZnVuY3Rpb24gdG9nZ2xlRW50cnkoaXRlbTogYW55LCBoaWRkZW5FbnRyaWVzOiBhbnlbXSk6IHsgaGlkZGVuOiBib29sZWFuLCBoaWRkZW5FbnRyaWVzOiBhbnlbXSB9IHtcclxuICBsZXQgaGlkZGVuOiBib29sZWFuO1xyXG4gIGNvbnN0IGlkeCA9IGhpZGRlbkVudHJpZXMuZmluZEluZGV4KGQgPT4ge1xyXG4gICAgcmV0dXJuIGQubmFtZSA9PT0gaXRlbS5uYW1lICYmIGQudmFsdWUgPT09IGl0ZW0udmFsdWU7XHJcbiAgfSk7XHJcbiAgaWYoaWR4ID4gLTEpIHtcclxuICAgIGhpZGRlbkVudHJpZXMuc3BsaWNlKGlkeCwgMSk7XHJcbiAgICBoaWRkZW4gPSBmYWxzZTtcclxuICB9IGVsc2Uge1xyXG4gICAgaGlkZGVuRW50cmllcy5wdXNoKGl0ZW0pO1xyXG4gICAgaGlkZGVuID0gdHJ1ZTtcclxuICB9XHJcbiAgcmV0dXJuIHsgaGlkZGVuLCBoaWRkZW5FbnRyaWVzOiBbLi4uaGlkZGVuRW50cmllc10gfTtcclxufSJdfQ==
