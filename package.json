@@ -21,7 +21,6 @@
     "package": "run-s build:lib:prod copy-files",
     "prettier": "prettier --write \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
     "prettier:ci": "prettier --check \"{src,projects}/**/*.{js,ts,html,scss,css,md,json}\"",
-    "postinstall": "ngcc"
   },
   "dependencies": {
     "@angular/animations": "~10.2.5",
