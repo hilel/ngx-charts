@@ -90,6 +90,9 @@ export class TooltipArea {
     const results = [];
 
     for (const group of this.results) {
+      if(this.isHidden({ name: group.name })) {
+        continue;
+      }
       const item = group.series.find(d => d.name.toString() === xVal.toString());
       let groupName = group.name;
       if (groupName instanceof Date) {

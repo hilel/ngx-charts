@@ -110,6 +110,9 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
   }
 
   getActiveCircle(): {} {
+    if(this.isHidden({ name: this.circle.name || this.data.name})) {
+      return undefined;// if isHidden no need to get active circle
+    }
     const indexActiveDataPoint = this.data.series.findIndex(d => {
       const label = d.name;
       return label && this.visibleValue && label.toString() === this.visibleValue.toString() && d.value !== undefined;
