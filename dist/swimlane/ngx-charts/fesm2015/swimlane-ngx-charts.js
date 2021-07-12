@@ -1940,6 +1940,9 @@ class CircleSeriesComponent {
         this.circle = this.getActiveCircle();
     }
     getActiveCircle() {
+        if ((this.circle || this.data) && this.isHidden({ name: (this.circle || this.data).name })) {
+            return undefined; // if isHidden no need to get active circle
+        }
         const indexActiveDataPoint = this.data.series.findIndex(d => {
             const label = d.name;
             return label && this.visibleValue && label.toString() === this.visibleValue.toString() && d.value !== undefined;
@@ -2682,6 +2685,9 @@ class TooltipArea {
     getValues(xVal) {
         const results = [];
         for (const group of this.results) {
+            if (this.isHidden({ name: group.name })) {
+                continue;
+            }
             const item = group.series.find(d => d.name.toString() === xVal.toString());
             let groupName = group.name;
             if (groupName instanceof Date) {

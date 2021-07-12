@@ -2129,6 +2129,9 @@
         };
         CircleSeriesComponent.prototype.getActiveCircle = function () {
             var _this = this;
+            if ((this.circle || this.data) && this.isHidden({ name: (this.circle || this.data).name })) {
+                return undefined; // if isHidden no need to get active circle
+            }
             var indexActiveDataPoint = this.data.series.findIndex(function (d) {
                 var label = d.name;
                 return label && _this.visibleValue && label.toString() === _this.visibleValue.toString() && d.value !== undefined;
@@ -2811,6 +2814,9 @@
             try {
                 for (var _b = __values(this.results), _c = _b.next(); !_c.done; _c = _b.next()) {
                     var group = _c.value;
+                    if (this.isHidden({ name: group.name })) {
+                        continue;
+                    }
                     var item = group.series.find(function (d) { return d.name.toString() === xVal.toString(); });
                     var groupName = group.name;
                     if (groupName instanceof Date) {
