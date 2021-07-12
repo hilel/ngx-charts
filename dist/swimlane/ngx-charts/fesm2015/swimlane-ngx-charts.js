@@ -2103,7 +2103,7 @@ CircleSeriesComponent.decorators = [
       />
       <svg:g
         ngx-charts-circle
-        *ngIf="!isHidden({ name: circle.seriesName })"
+        *ngIf="!isHidden({ name: circle.seriesName || data.name })"
         class="circle"
         [cx]="circle.cx"
         [cy]="circle.cy"
@@ -2123,7 +2123,6 @@ CircleSeriesComponent.decorators = [
         [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
         [tooltipTemplate]="tooltipTemplate"
         [tooltipContext]="circle.data"
-        [hidden]="isHidden({ name: circle.seriesName })"
       />
     </svg:g>
   `,
